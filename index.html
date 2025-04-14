@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tareas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section>
+    <h1>Ingresar tarea</h1>
+    <button id="btn-mostrar">agregar tarea</button>
+
+    <div id="inputs-container">
+      <label for="titulo">Ingresa título de tu tarea:</label>
+      <input type="text" id="titulo" name="titulo"><br><br>
+
+      <label for="descripcion">Ingresa descripción de tu tarea:</label>
+      <input type="text" id="descripcion" name="descripcion"><br><br>
+
+      <label>Estado:</label><br>
+      <input type="radio" id="pendiente" name="estado" value="pendiente" checked>
+      <label for="pendiente">Pendiente</label><br>
+
+      <input type="radio" id="en_proceso" name="estado" value="en_proceso">
+      <label for="en_proceso">En proceso</label><br><br>
+
+      <button type="button" onclick="guardar_info()">Guardar</button>
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <div class="estado">
+      <h2> Pendientes</h2>
+      <div id="lista_pendiente"></div>
+    </div>
+
+    <div class="estado">
+      <h2> En proceso</h2>
+      <div id="lista_en_proceso"></div>
+    </div>
+
+    <div class="estado">
+      <h2> Terminadas</h2>
+      <div id="lista_terminado"></div>
+    </div>
+  </section>
+
+  <script src="main.js"></script>
+</body>
+</html>
