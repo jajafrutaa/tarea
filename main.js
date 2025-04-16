@@ -1,14 +1,17 @@
+// Array global para almacenar tareas (solo mientras la página esté abierta)
+let tareas = [];
+
+// Mostrar/ocultar formulario
 document.addEventListener("DOMContentLoaded", function () {
-  const boton = document.getElementById("btn-mostrar");
+  const botonMostrar = document.getElementById("btn-mostrar");
+  const botonOcultar = document.getElementById("btn-ocultar");
   const contenedor = document.getElementById("inputs-container");
 
-  boton.addEventListener("click", function () {
-    contenedor.style.display = "block";
-  });
-
-  mostrarTareasGuardadas();
+  botonMostrar.addEventListener("click", () => contenedor.style.display = "block");
+  botonOcultar.addEventListener("click", () => contenedor.style.display = "none");
 });
 
+// Guardar tarea (pero no en localStorage)
 function guardar_info() {
   const titulo = document.getElementById("titulo").value;
   const descripcion = document.getElementById("descripcion").value;
@@ -22,24 +25,12 @@ function guardar_info() {
     estado
   };
 
-  const tareas = obtenerTareas();
-  tareas.push(tarea);
-  localStorage.setItem("tareas", JSON.stringify(tareas));
-
+  tareas.push(tarea); // Agrega a la lista en memoria (no se guarda)
   agregarTareaAlDOM(tarea);
   limpiarInputs();
 }
 
-function obtenerTareas() {
-  return JSON.parse(localStorage.getItem("tareas")) || [];
-}
-
-function mostrarTareasGuardadas() {
-  const tareas = obtenerTareas();
-  tareas.forEach(tarea => agregarTareaAlDOM(tarea));
-}
-
-//esta funcion sirvi para agregar las tareas al DOM
+// Agregar tarea al DOM
 function agregarTareaAlDOM(tarea) {
   const contenedor = document.getElementById(`lista_${tarea.estado}`);
   const div = document.createElement("div");
@@ -49,9 +40,9 @@ function agregarTareaAlDOM(tarea) {
     <strong>${tarea.titulo}</strong>
     <p>${tarea.descripcion}</p>
     ${tarea.estado === "pendiente" ? `
-      <button onclick="moverAEnProceso(${tarea.id})"> En proceso</button>
+      <button onclick="moverAEnProceso(${tarea.id})">En proceso</button>
     ` : tarea.estado === "en_proceso" ? `
-      <button onclick="marcarComoTerminada(${tarea.id})"> Terminar</button>
+      <button onclick="marcarComoTerminada(${tarea.id})">Terminar</button>
     ` : `
       <button onclick="eliminarTarea(${tarea.id})">🗑 Eliminar</button>
     `}
@@ -59,39 +50,38 @@ function agregarTareaAlDOM(tarea) {
   contenedor.appendChild(div);
 }
 
+// Cambiar estado de las tareas (pero no se guardan)
 function moverAEnProceso(id) {
-  let tareas = obtenerTareas();
-  const index = tareas.findIndex(t => t.id === id);
-  if (index !== -1) {
-    tareas[index].estado = "en_proceso";
-    localStorage.setItem("tareas", JSON.stringify(tareas));
+  const tarea = tareas.find(t => t.id === id);
+  if (tarea) {
+    tarea.estado = "en_proceso";
     recargarTareas();
   }
 }
 
 function marcarComoTerminada(id) {
-  let tareas = obtenerTareas();
-  const index = tareas.findIndex(t => t.id === id);
-  if (index !== -1) {
-    tareas[index].estado = "terminado";
-    localStorage.setItem("tareas", JSON.stringify(tareas));
+  const tarea = tareas.find(t => t.id === id);
+  if (tarea) {
+    tarea.estado = "terminado";
     recargarTareas();
   }
 }
 
+// Eliminar tarea
 function eliminarTarea(id) {
-  let tareas = obtenerTareas().filter(t => t.id !== id);
-  localStorage.setItem("tareas", JSON.stringify(tareas));
+  tareas = tareas.filter(t => t.id !== id);
   recargarTareas();
 }
 
+// Actualizar la lista en pantalla
 function recargarTareas() {
   document.getElementById("lista_pendiente").innerHTML = "";
   document.getElementById("lista_en_proceso").innerHTML = "";
   document.getElementById("lista_terminado").innerHTML = "";
-  mostrarTareasGuardadas();
+  tareas.forEach(tarea => agregarTareaAlDOM(tarea));
 }
 
+// Limpiar formulario
 function limpiarInputs() {
   document.getElementById("titulo").value = "";
   document.getElementById("descripcion").value = "";
