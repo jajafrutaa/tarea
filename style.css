@@ -1,32 +1,124 @@
 #inputs-container {
-    display: none;
-    margin-top: 10px;
-  }
-  
-  body {
-    font-family: Arial;
-    padding: 20px;
-  }
-  
-  .estado {
+  display: none;
+  margin-top: 10px;
+}
+
+body {
+  font-family: Arial;
+  padding: 20px;
+}
+
+.estado {
     margin-bottom: 20px;
-  }
-  
-  .tarea {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-  }
-  
-  .pendiente {
-    background-color: #fff3cd;
-  }
-  
-  .en_proceso {
-    background-color: #d1ecf1;
-  }
-  
-  .terminado {
-    background-color: #d4edda;
-  }
+}
+
+.tarea {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.pendiente {
+  background-color: rgb(255, 255, 161);
+}
+
+.en_proceso {
+  background-color: rgb(255, 124, 124);
+  color: white; 
+}
+
+.terminado {
+  background-color: rgb(130, 255, 130);
+  color: white;
+}
+
+input[type=button] {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.boton {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.boton:hover {
+  background-color: #45a049;
+}
+.boton:active {
+  background-color: #3e8e41;
+}
+.boton_ocultar {
+  padding: 10px 20px;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.boton_ocultar:hover {
+  background-color: rgb(77, 77, 77);
+}
+.boton_ocultar:active {
+  background-color: rgb(77, 77, 77);
+}
+form {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+}
+
+label {
+	display: flex;
+	cursor: pointer;
+	font-weight: 500;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 0.375em;
+}
+
+label input {
+	position: absolute;
+	left: -9999px;
+}
+
+label input:checked + span {
+  background-color: rgba(255, 255, 255, 0.84);
+}
+
+label input:checked + span:before {
+  box-shadow: inset 0 0 0 0.4375em #000;
+}
+
+label span {
+	display: flex;
+	align-items: center;
+	padding: 0.375em 0.75em 0.375em 0.375em;
+	border-radius: 99em;
+	transition: 0.25s ease;
+}
+
+label span:hover {
+  background-color: rgba(255, 255, 255, 0.84);
+}
+
+label span:before {
+	display: flex;
+	flex-shrink: 0;
+	content: "";
+	background-color: #fff;
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 50%;
+	margin-right: 0.375em;
+	transition: 0.25s ease;
+  box-shadow: inset 0 0 0 0.125em #000;
+}
