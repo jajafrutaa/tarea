@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="css/style.css"/>
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tareas</title>
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <section>
     <h1>Ingresar tarea</h1>
-    <button id="btn-mostrar">agregar tarea</button>
+    
+    <button id="btn-mostrar" class="boton">agregar tarea</button>
+    <button id="btn-ocultar" class="boton_ocultar">ocultar tarea</button>
 
     <div id="inputs-container">
+
       <label for="titulo">Ingresa título de tu tarea:</label>
       <input type="text" id="titulo" name="titulo"><br><br>
 
@@ -26,7 +29,8 @@
       <input type="radio" id="en_proceso" name="estado" value="en_proceso">
       <label for="en_proceso">En proceso</label><br><br>
 
-      <button type="button" onclick="guardar_info()">Guardar</button>
+      <button type="button" onclick="guardar_info()" value="button" class="boton">Guardar</button>
+      
     </div>
   </section>
 
@@ -49,6 +53,8 @@
     </div>
   </section>
 
-  <script src="main.js"></script>
+  <script src="js/main.js"></script>
+
 </body>
+
 </html>
